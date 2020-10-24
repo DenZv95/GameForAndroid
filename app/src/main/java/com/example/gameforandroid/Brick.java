@@ -5,33 +5,24 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-public class Brick {
-    private Paint mPaint;
-    private int xPos,yPos,size;
-
-
+public class Brick extends Cell {
+    private Paint brickPaint;
     public Brick(int xPos, int yPos, int size) {
-        this.size = size;
-        this.xPos = xPos;
-        this.yPos = yPos;
-        mPaint = new Paint();
+        super(xPos, yPos, size);
+        brickPaint = new Paint();
     }
 
-    protected void onDraw(int left , int top, Canvas canvas) {
-        mPaint.setColor(Color.BLACK);
-        mPaint.setStyle(Paint.Style.FILL);
+    @Override
+    protected void onDraw(int left, int top, Canvas canvas) {
+        super.onDraw(left, top, canvas);
+        brickPaint.setColor(Color.BLACK);
+        brickPaint.setStyle(Paint.Style.FILL);
         canvas.drawRect(left + (size*xPos),
-                        top + (size*yPos),
-                        size+left + (size*xPos),
-                        size+top + (size*yPos),
-                        mPaint);
+                top + (size*yPos),
+                size+left + (size*xPos),
+                size+top + (size*yPos),
+                brickPaint);
         canvas.save();
-           // }
-        ///}
-        //canvas.save();
-        // восстанавливаем холст
-        //canvas.restore();
     }
-
 
 }

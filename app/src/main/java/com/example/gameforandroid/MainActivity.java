@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN: // нажатие
-                map.addBrick( (int) x, (int) y );
+                //map.addBrick( (int) x, (int) y );
+                map.addBubble( (int) x, (int) y );
                 setContentView(map);
                 break;
             case MotionEvent.ACTION_MOVE: // движение
