@@ -1,5 +1,6 @@
 package com.example.gameforandroid;
 
+import androidx.annotation.ContentView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -26,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN: // нажатие
-                //map.addBrick( (int) x, (int) y );
-                map.addBubble( (int) x, (int) y );
+                map.onClick( (int) x, (int) y );
+                //map.addBubble( (int) x, (int) y );
                 setContentView(map);
                 break;
             case MotionEvent.ACTION_MOVE: // движение

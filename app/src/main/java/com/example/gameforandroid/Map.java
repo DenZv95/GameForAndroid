@@ -2,8 +2,8 @@ package com.example.gameforandroid;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.view.View;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +14,8 @@ public class Map extends View {
     private final int yNum;
     private int left;
     private int top;
-    ArrayList<List<Cell>> mapObjectList;
+    private Hud hud;
+    private ArrayList<List<Cell>> mapObjectList;
 
     public Map(Context context) {
         super(context);
@@ -23,6 +24,7 @@ public class Map extends View {
         xNum = 5;
         yNum = 5;
 
+        hud = new Hud();
         mapObjectList = new ArrayList<>(xNum);
 
         for(int _i = 0; _i < xNum; _i++) {
@@ -35,9 +37,9 @@ public class Map extends View {
             }
         }
 
-        mapObjectList.get(1).add(1 , new Bubble(1,1,size) );
-        mapObjectList.get(2).add(2 , new Brick(2,2,size) );
-        mapObjectList.get(3).add(3 , new Bubble(3,3,size) );
+        //mapObjectList.get(1).add(1 , new Bubble(1,1,size) );
+        //mapObjectList.get(2).add(2 , new Brick(2,2,size) );
+        //mapObjectList.get(3).add(3 , new Bubble(3,3,size) );
     }
 
     protected void onDraw(Canvas canvas) {
@@ -46,87 +48,38 @@ public class Map extends View {
         left = (getWidth() - (size * xNum)) / 2;
         top = (getHeight() - (size * yNum)) / 2;
 
+        hud.onDraw(canvas);
+
         for (List<Cell> mapObjects : mapObjectList) {
             for (Cell mapObject : mapObjects){
                 mapObject.onDraw(left,top,canvas);
             }
         }
 
-        canvas.save();
+        //canvas.save();
         canvas.restore();
     }
 
-    public void addBrick(int xСoordinate, int yСoordinate){
-        /*
+    public void onClick(int xc, int yc){
+
         int x;
         int y;
         boolean add = true;
 
-        if (xСoordinate > left & yСoordinate > top) {
-            x = (xСoordinate - left)/size;
-            y = (yСoordinate - top)/size;
+        if (xc > left & yc > top) {
+            x = (xc - left)/size;
+            y = (yc - top)/size;
             if(x < xNum & y < yNum){
 
-                for(int i = 0; i < brickList.size(); i++) {
-                    if(brickList.get(i).getX() == x && brickList.get(i).getY() == y){
-                        rowList.get(x)[y] = -1;
-                        brickList.remove(i);
-                        add = false;
-                        break;
-                    }
-                }
-
-                for(int i = 0; i < bubbleList.size(); i++) {
-                    if(bubbleList.get(i).getX() == x && bubbleList.get(i).getY() == y){
-                        //bubbleList.remove(i);
-                        add = false;
-                        break;
-                    }
-                }
-
-                if(add){
-                    rowList.get(x)[y] = -3;
-                    brickList.add( new Brick(x, y, size) );
-                }
+                mapObjectList.get(x).set(y , hud.getUnit(x,y,size));
+                int a = 1;
             }
         }
-         */
-    }
-
-    public void addBubble(int xСoordinate, int yСoordinate){
-        /*
-        int x;
-
-        int y;
-        boolean add = true;
-
-        if (xСoordinate > left & yСoordinate > top) {
-            x = (xСoordinate - left)/size;
-            y = (yСoordinate - top)/size;
-            if(x < xNum & y < yNum){
-                for(int i = 0; i < brickList.size(); i++) {
-                    if(brickList.get(i).getX() == x && brickList.get(i).getY() == y){
-                        //brickList.remove(i);
-                        add = false;
-                        break;
-                    }
-                }
-                for(int i = 0; i < bubbleList.size(); i++) {
-                    if(bubbleList.get(i).getX() == x && bubbleList.get(i).getY() == y){
-                        rowList.get(x)[y] = -1;
-                        bubbleList.remove(i);
-                        add = false;
-                        break;
-                    }
-                }
-                if(add){
-                    rowList.get(x)[y] = -2;
-                    bubbleList.add( new Bubble(x, y, size) );
-                }
-            }
+        else {
+            hud.onClick(xc,yc);
         }
 
-        */
     }
+
 
 }
