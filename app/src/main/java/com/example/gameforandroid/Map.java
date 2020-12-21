@@ -2,13 +2,15 @@ package com.example.gameforandroid;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Map extends View {
-
+    private Paint LinePaint;
     private final int size;
     private final int xNum;
     private final int yNum;
@@ -37,27 +39,30 @@ public class Map extends View {
             }
         }
 
-        //mapObjectList.get(1).add(1 , new Bubble(1,1,size) );
-        //mapObjectList.get(2).add(2 , new Brick(2,2,size) );
-        //mapObjectList.get(3).add(3 , new Bubble(3,3,size) );
+        mapObjectList.get(1).add(1 , new Bubble(0,0,size) );
+        mapObjectList.get(2).add(2 , new Brick(1,2,size) );
+        mapObjectList.get(3).add(3 , new Bubble(2,1,size) );
     }
 
     protected void onDraw(Canvas canvas) {
 
-        super.onDraw(canvas);
-        left = (getWidth() - (size * xNum)) / 2;
-        top = (getHeight() - (size * yNum)) / 2;
+       // super.onDraw(canvas);
+        left = (canvas.getWidth() - (size * xNum)) / 2;
+        top = (canvas.getHeight() - (size * yNum)) / 2;
+
 
         hud.onDraw(canvas);
 
         for (List<Cell> mapObjects : mapObjectList) {
             for (Cell mapObject : mapObjects){
+                //mapObject.setColor(Color.YELLOW);
+               //LinePrint.setStyle(Paint.Style.FILL);
                 mapObject.onDraw(left,top,canvas);
             }
         }
 
-        //canvas.save();
-        canvas.restore();
+        canvas.save();
+        //canvas.restore();
     }
 
     public void onClick(int xc, int yc){
