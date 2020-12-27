@@ -2,10 +2,11 @@
 package com.example.gameforandroid;
 
 import android.app.Activity;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.example.gameforandroid.gameloop.GamePanel;
 
 public class MainActivity extends Activity {
 

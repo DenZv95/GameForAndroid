@@ -1,7 +1,9 @@
-package com.example.gameforandroid;
+package com.example.gameforandroid.gameloop;
 
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
+
+import com.example.gameforandroid.gameloop.GamePanel;
 
 /**
  * Created by D on 2017-11-17.
@@ -41,7 +43,7 @@ public class MainThread extends Thread {
             try {
                 canvas = this.surfaceHolder.lockCanvas();
                 synchronized (surfaceHolder) {
-                    this.gamePanel.update();
+                    this.gamePanel.update(timeMillis);
                     this.gamePanel.draw(canvas);
                 }
             } catch(Exception e) {
@@ -68,8 +70,10 @@ public class MainThread extends Thread {
             if(frameCount == MAX_FPS) {
                 averageFPS = 1000/((totalTime/frameCount)/1000000);
                 frameCount = 0;
+               // System.out.println(targetTime);
                 totalTime = 0;
-                System.out.println(averageFPS);
+                //System.out.println(averageFPS);
+
             }
         }
     }

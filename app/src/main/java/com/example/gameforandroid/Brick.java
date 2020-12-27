@@ -6,8 +6,8 @@ import android.graphics.Paint;
 
 public class Brick extends Cell {
     private Paint brickPaint;
-    public Brick(int xPos, int yPos, int size) {
-        super(xPos, yPos, size);
+    public Brick(int xPos, int yPos, int size, Map map) {
+        super(xPos, yPos, size, map);
         brickPaint = new Paint();
     }
 
@@ -24,4 +24,8 @@ public class Brick extends Cell {
         canvas.save();
     }
 
+    @Override
+    public int getType() {
+        return -2;
+    }
 }

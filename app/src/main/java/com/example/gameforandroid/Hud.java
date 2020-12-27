@@ -4,6 +4,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import com.example.gameforandroid.bubbles.Bubble;
+
 public class Hud {
 
     private Paint cellPaint;
@@ -81,16 +83,16 @@ public class Hud {
         canvas.save();
     }
 
-    public Cell getUnit(int xPos, int yPos, int size) {
+    public Cell getUnit(int xPos, int yPos, int size, Map map) {
         switch(STATE) {
             case 1:
-                return new Bubble(xPos, yPos, size);
+                return new Bubble(xPos, yPos, size, map);
             case 2:
-                return new Brick(xPos, yPos, size);
+                return new Brick(xPos, yPos, size, map);
             case 3:
-                return new Cell(xPos, yPos, size);
+                return new Cell(xPos, yPos, size, map);
             default:
-                return new Bubble(xPos, yPos, size);
+                return new Bubble(xPos, yPos, size, map);
         }
     }
 
