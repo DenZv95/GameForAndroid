@@ -84,11 +84,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
 
 
-    @Override
-    public void draw(Canvas canvas) {
+    //@Override
+    public void draw(Canvas canvas, double fps) {
         super.draw(canvas);
         canvas.drawColor(Color.WHITE);
-        map.draw(canvas);
+        map.draw(canvas, fps);
         //canvas.restore();
     }
 

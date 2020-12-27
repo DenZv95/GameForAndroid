@@ -44,7 +44,14 @@ public class BubbleMoveState extends BubbleStates {
             }
         }
         else {
+            bubble.wayX.clear();
+            bubble.wayY.clear();
+            bubble.passedWay = 1;
+            bubble.map.activeBubble = false;
+            bubble.map.activeBubbleX = 0;
+            bubble.map.activeBubbleY = 0;
             bubble.changeState(bubble.getStopState());
+
         }
     }
 

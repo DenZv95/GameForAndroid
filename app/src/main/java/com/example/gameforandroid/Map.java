@@ -23,6 +23,10 @@ public class Map extends View {
 
     private ArrayList<List<Integer>> mapObjectArray;
 
+    public boolean activeBubble;
+    public int activeBubbleX;
+    public int activeBubbleY;
+
     public Map(Context context) {
         super(context);
 
@@ -32,6 +36,9 @@ public class Map extends View {
 
         hud = new Hud();
         mapObjectList = new ArrayList<>(xNum);
+
+        activeBubbleX = 0;
+        activeBubbleY = 0;
 
         for(int _i = 0; _i < xNum; _i++) {
             mapObjectList.add(new ArrayList<Cell>(yNum));
@@ -43,9 +50,11 @@ public class Map extends View {
             }
         }
 
-        mapObjectList.get(4).add(4 , new Bubble(4,4,size,this) );
-       // mapObjectList.get(2).add(2 , new Brick(1,2,size) );
-        //mapObjectList.get(3).add(3 , new Bubble(2,1,size) );
+
+        //mapObjectList.get(4).add(2 , new Brick(4,2,size, this) );
+       // mapObjectList.get(3).add(4 , new Brick(3,4,size, this) );
+        //mapObjectList.get(4).set(3 , new Bubble(4,3,size, this) );
+        activeBubble = false;
     }
 
     public void update(long dt) {
@@ -56,14 +65,16 @@ public class Map extends View {
         }
     }
 
-    protected void onDraw(Canvas canvas) {
+    //@Override
+    //protected void onDraw(Canvas canvas , double averageFPS) {
+    public void draw(Canvas canvas , double averageFPS) {
 
        // super.onDraw(canvas);
         left = (canvas.getWidth() - (size * xNum)) / 2;
         top = (canvas.getHeight() - (size * yNum)) / 2;
 
 
-        hud.onDraw(canvas);
+        hud.onDraw(canvas , averageFPS);
 
         for (List<Cell> mapObjects : mapObjectList) {
             for (Cell mapObject : mapObjects){
@@ -87,8 +98,29 @@ public class Map extends View {
             x = (xc - left)/size;
             y = (yc - top)/size;
             if(x < xNum & y < yNum){
-                mapObjectList.get(x).get(y).onClick();
-                int a = 1;
+                //mapObjectList.get(x).get(y).onClick();
+                //int a = 1;
+                if (hud.getSTATE() == 1){
+                    if (mapObjectList.get(x).get(y).getType() == -3) {
+                        mapObjectList.get(x).get(y).onClick();
+                    }
+                    else if (mapObjectList.get(x).get(y).getType() == -1){
+                        if (activeBubble){
+                            activeBubble = false;
+                            mapObjectList.get(activeBubbleX).get(activeBubbleY).addFinish(x,y);
+                        }
+                    }
+                }
+                else if (hud.getSTATE() == 2){
+                    mapObjectList.get(x).set(y , hud.getUnit(x,y,size,this) );
+                }
+                else if (hud.getSTATE() == 3){
+                    mapObjectList.get(x).set(y , hud.getUnit(x,y,size,this) );
+                }
+                else {
+                    mapObjectList.get(x).set(y , hud.getUnit(x,y,size,this) );
+                }
+
             }
         }
         else {
@@ -118,4 +150,6 @@ public class Map extends View {
         }
         return mapObjectArray;
     }
+
+
 }

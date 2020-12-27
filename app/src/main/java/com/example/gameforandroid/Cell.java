@@ -9,7 +9,7 @@ public class Cell {
     protected int xPos;
     protected int yPos;
     protected int size;
-    protected Map map;
+    public Map map;
 
     public Cell(int xPos, int yPos, int size , Map map) {
         this.size = size;
@@ -59,4 +59,6 @@ public class Cell {
     public int getType(){
         return -1;
     }
+
+    public void addFinish(int X, int Y){}
 }

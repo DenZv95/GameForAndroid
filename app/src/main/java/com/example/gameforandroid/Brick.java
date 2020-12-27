@@ -28,4 +28,9 @@ public class Brick extends Cell {
     public int getType() {
         return -2;
     }
+
+    @Override
+    public void addFinish(int X, int Y) {
+        super.addFinish(X, Y);
+    }
 }

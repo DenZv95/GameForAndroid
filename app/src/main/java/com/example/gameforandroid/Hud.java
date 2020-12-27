@@ -3,6 +3,7 @@ package com.example.gameforandroid;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.view.ViewDebug;
 
 import com.example.gameforandroid.bubbles.Bubble;
 
@@ -13,6 +14,7 @@ public class Hud {
     private Paint bubblePaint;
     private Paint bubbleActivePaint;
     private Paint statePaint;
+    private Paint fpsText;
 
     private int STATE = 0;
     private int size, left;
@@ -41,9 +43,13 @@ public class Hud {
         statePaint = new Paint();
         statePaint.setColor(Color.GREEN);
         statePaint.setStyle(Paint.Style.FILL);
+
+        fpsText = new Paint();
+        fpsText.setColor(Color.BLACK);
+        fpsText.setTextSize(60);
     }
 
-    public void onDraw(Canvas canvas) {
+    public void onDraw(Canvas canvas , double averageFPS) {
         left = (canvas.getWidth() - (size * 4)) / 2;
 
         for (int i = 0; i < 4; i++)
@@ -80,6 +86,7 @@ public class Hud {
                 size+top - 20,
                 cellPaint);
 
+        canvas.drawText(String.valueOf((int) averageFPS),60,70, fpsText);
         canvas.save();
     }
 
@@ -91,9 +98,10 @@ public class Hud {
                 return new Brick(xPos, yPos, size, map);
             case 3:
                 return new Cell(xPos, yPos, size, map);
-            default:
+            case 0:
                 return new Bubble(xPos, yPos, size, map);
         }
+        return null;
     }
 
     public void onClick(int xc, int yc){
@@ -108,4 +116,7 @@ public class Hud {
         }
     }
 
+    public int getSTATE() {
+        return STATE;
+    }
 }

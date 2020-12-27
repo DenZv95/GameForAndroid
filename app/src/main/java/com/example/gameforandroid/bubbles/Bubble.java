@@ -18,6 +18,7 @@ import java.util.Random;
 public class Bubble extends Cell {
     private Paint bubblePaint;
     Random rand;
+
     private BubbleStates state;
     private BubbleStates stop;
     private BubbleStates active;
@@ -27,7 +28,7 @@ public class Bubble extends Cell {
     private float passedWayY = 0;
 
     private int lenWay = 0;
-    public int passedWay = 0;
+    public int passedWay = 1;
     public ArrayList<Integer> wayX;
     public ArrayList<Integer> wayY;
 
@@ -123,7 +124,7 @@ public class Bubble extends Cell {
     }
 
     public void setPassedWayX(float speedX) {
-        findWave(0, 0, 4, 4);
+
         this.passedWayX = 0;
     }
 
@@ -194,10 +195,10 @@ public class Bubble extends Cell {
             { //решение найдено
                 add = false;
 
-                //searchWay(xPos, yPos, finishX, fisnishY);
-                searchWay(4, 4, 0, 0, 0);
-                wayX.remove(0);
-                wayY.remove(0);
+                searchWay(xUnit, yUnit, finishX, fisnishY, 0);
+                //searchWay(4, 4, 0, 0, 0);
+//                wayX.remove(0);
+//                wayY.remove(0);
                 changeState(getMoveState());
                 return true;
             }
@@ -224,11 +225,11 @@ public class Bubble extends Cell {
         return true;
     }
 
-    if (fY - 1 > 0)
+    if (fY - 1 >= 0)
     {
         if(mapObjectArray.get(fX).get(fY) < mapObjectArray.get(fX).get(fY-1) )
         {
-            if (searchWay(X, Y, fX, fY-1, deep + 1)) {
+            if (searchWay(X, Y, fX, fY - 1, deep + 1)) {
                 wayX.add(fX);
                 wayY.add(fY);
                 return true;
@@ -237,9 +238,9 @@ public class Bubble extends Cell {
     }
 
 
-    if (fX + 1 < map.xNum)
+    if (fX + 1 < map.xNum )
     {
-        if(mapObjectArray.get(fX).get(fY) < mapObjectArray.get(fX+1).get(fY) ) {
+        if(mapObjectArray.get(fX).get(fY) < mapObjectArray.get(fX + 1).get(fY) ) {
             if (searchWay(X, Y, fX + 1, fY, deep + 1)) {
                 wayX.add(fX);
                 wayY.add(fY);
@@ -259,9 +260,9 @@ public class Bubble extends Cell {
         }
     }
 
-    if (fX - 1 > 0)
+    if (fX - 1 >= 0)
     {
-        if(mapObjectArray.get(fX).get(fY) < mapObjectArray.get(fX-1).get(fY) ) {
+        if(mapObjectArray.get(fX).get(fY) < mapObjectArray.get(fX - 1).get(fY) ) {
             if (searchWay(X, Y, fX - 1, fY, deep + 1)) {
                 wayX.add(fX);
                 wayY.add(fY);
@@ -270,6 +271,14 @@ public class Bubble extends Cell {
         }
     }
     return false;
+    }
+
+    @Override
+    public void addFinish(int X, int Y) {
+        findWave(X, Y, xPos, yPos);
+        //super.addFinish(X, Y);
+        //g
+
     }
 }
 

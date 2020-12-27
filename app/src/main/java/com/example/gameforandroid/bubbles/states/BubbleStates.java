@@ -17,6 +17,6 @@ public abstract class BubbleStates {
     public abstract boolean onTouchEvent();
     public abstract void update(long dt);
     public abstract void draw(int left, int top, Canvas canvas);
-
+    //
 
 }

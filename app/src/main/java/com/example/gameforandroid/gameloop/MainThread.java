@@ -44,7 +44,7 @@ public class MainThread extends Thread {
                 canvas = this.surfaceHolder.lockCanvas();
                 synchronized (surfaceHolder) {
                     this.gamePanel.update(timeMillis);
-                    this.gamePanel.draw(canvas);
+                    this.gamePanel.draw(canvas, averageFPS);
                 }
             } catch(Exception e) {
                 e.printStackTrace();

@@ -23,6 +23,11 @@ public class BubbleStopState extends BubbleStates {
 
     @Override
     public boolean onTouchEvent() {
+
+        //bubble.map.activeBubble = bubble;
+        bubble.map.activeBubble = true;
+        bubble.map.activeBubbleX = bubble.getxPos();
+        bubble.map.activeBubbleY = bubble.getyPos();
         bubble.changeState(bubble.getActiveState());
         return false;
     }

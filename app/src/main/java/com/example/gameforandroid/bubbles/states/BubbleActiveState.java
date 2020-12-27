@@ -34,8 +34,9 @@ public class BubbleActiveState extends BubbleStates{
 
     @Override
     public boolean onTouchEvent() {
-        bubble.setPassedWayX(1);
-        //bubble.changeState(bubble.getStopState ());
+        bubble.changeState(bubble.getStopState());
+       // bubble.map.activeBubble = null;
+        bubble.map.activeBubble = false;
         return false;
     }
 }
